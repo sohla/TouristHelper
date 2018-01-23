@@ -31,8 +31,9 @@ class TransportViewController: UIViewController, LocationService {
     }
     @IBAction func onHomeTouchUp(_ sender: Any) {
 
-        // hack an update for now
+        //• hack an update for now
         let _ = locationController.current.updateValue(0, forKey: "update")
+        
     }
     @IBAction func onNextTouchUp(_ sender: Any) {
     }
