@@ -3,6 +3,7 @@ PODS:
     - Differ (~> 1.0)
     - ReactiveKit (~> 3.8)
   - Differ (1.0.3)
+  - Networking (4.1.1)
   - ReactiveKit (3.8.2)
   - SwiftLocation (3.1.0):
     - SwiftyJSON (~> 4.0.0-alpha.1)
@@ -10,15 +11,17 @@ PODS:
 
 DEPENDENCIES:
   - Bond
+  - Networking (~> 4)
   - SwiftLocation (~> 3.1.0)
 
 SPEC CHECKSUMS:
   Bond: 181d6ff061f17fe87a84b12d6f0c4d76d5456ce4
   Differ: 0c220ac75542f5f17f91b1303b85bf07d871ecd7
+  Networking: ffde5754883907f90f9f751e183eba4a75dc4b89
   ReactiveKit: d2fe54503e0b6d0fa48b2cc6e0b0f99869f13ee6
   SwiftLocation: 8f5ef4f510a45e43239de57a3145b3669301e898
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 07e0a7428f1a5cd17e44ea08c835d359a3896fce
+PODFILE CHECKSUM: dcac07ca914a120e4f30c6b1cf176aa36fe4c719
 
 COCOAPODS: 1.1.1

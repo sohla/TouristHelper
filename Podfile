@@ -8,5 +8,6 @@ target 'TouristHelper' do
   # Pods for TouristHelper
   pod 'SwiftLocation', '~> 3.1.0'
   pod 'Bond'
+  pod 'Networking', '~> 4'
 
 end
