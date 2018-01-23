@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import ReactiveKit
 
 class MapViewController: UIViewController, LocationService {
 
@@ -30,17 +31,31 @@ class MapViewController: UIViewController, LocationService {
                 self.mapView!.showsUserLocation = true
         }.dispose(in: bag)
         
-        locationController.current.observeNext{ [unowned self] e in
+        let lat:  Property<Double> = (locationController.current?.lat)!
+        let lng:  Property<Double> = (locationController.current?.lng)!
+        
+        let coords = combineLatest(lat,lng) { lat, lng -> (Double,Double) in
+            return (lat,lng)
+        }
+        
+        coords.observeNext{ [unowned self] e in
             
-            let userLocation = CLLocation(latitude: e.source.dictionary["lat"]!, longitude: e.source.dictionary["lng"]!)
-            print("current location : \(userLocation)")
+            print(e)
+            let userLocation = CLLocation(latitude: e.0 , longitude: e.1)
             let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1500, 1500)
             self.mapView?.setRegion(region, animated: true)
-            
+        
         }.dispose(in: bag)
 
-//        let loc = try? Location.init(["name":"home","geometry":["lat":12.3,"lng":45.6]])
-//        if let l = loc { print(l)}
+//        locationController.current.observeNext{ [unowned self] e in
+//            
+//            let userLocation = CLLocation(latitude: e.source.dictionary["lat"]!, longitude: e.source.dictionary["lng"]!)
+//            print("current location : \(userLocation)")
+//            let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1500, 1500)
+//            self.mapView?.setRegion(region, animated: true)
+//            
+//        }.dispose(in: bag)
+
     }
 
 }

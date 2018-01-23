@@ -7,11 +7,14 @@
 //
 
 import Foundation
+import ReactiveKit
+import Bond
 
 struct Location {
     
-    let title: String
-    let location: (lat: Double, lng: Double)
+    let title = Property<String>("zero")
+    let lat = Property<Double>(0)
+    let lng = Property<Double>(0)
 }
 
 enum SerializationError: Error {
@@ -35,8 +38,11 @@ extension Location {
                 throw SerializationError.missing("geometry")
         }
 
-        self.title = title
-        self.location = (lat,lng)
+        self.title.value = title
+        self.lat.value = lat
+        self.lng.value = lng
     }
+    
+    
 }
 
