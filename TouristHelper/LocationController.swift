@@ -7,9 +7,22 @@
 //
 
 import Foundation
+import CoreLocation
 import SwiftLocation
+import ReactiveKit
+import Bond
+
+protocol LocationService {
+    associatedtype T
+    func setLocationService(_ : T)
+    func assertLocationService()
+}
 
 class LocationController {
+    
+    var status = Property<Int>(0)
+    let current = MutableObservableDictionary(["lat":0.0,"lng":0.0])
+    
     
     init() {
 
@@ -17,12 +30,26 @@ class LocationController {
       
         Locator.events.listen { newStatus in
             print("Authorization status changed to \(newStatus)")
+            self.status.value = Int(newStatus.rawValue)
         }
         
-        Locator.subscribeSignificantLocations(onUpdate: { newLocation in
-            print("New location \(newLocation)")
-        }) { (err, lastLocation) -> (Void) in
-            print("Failed with err: \(err)")
-        }
+        Locator.subscribePosition(accuracy: .city, onUpdate: { newLocation in
+            
+            let nl = ["lat":newLocation.coordinate.latitude,
+                      "lng":newLocation.coordinate.longitude]
+            let _ = self.current.replace(with: nl)
+            
+        }, onFail: { err, last in
+            
+            print("Failed with error: \(err)")
+        })
+
+//        // for low power use
+//        Locator.subscribeSignificantLocations(onUpdate: { newLocation in
+//            print("New location \(newLocation)")
+//        }) { (err, lastLocation) -> (Void) in
+//            print("Failed with err: \(err)")
+//        }
+
     }
 }

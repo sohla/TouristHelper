@@ -8,13 +8,25 @@
 
 import UIKit
 
-class DescriptionViewController: UIViewController {
+class DescriptionViewController: UIViewController, LocationService {
 
     @IBOutlet weak var titleLabel: UILabel!
+    
+    private var locationController: LocationController!
+
+    func setLocationService(_ lc: LocationController) {
+        locationController = lc
+    }
+    
+    func assertLocationService() {
+        assert(locationController != nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        assertLocationService()
+        
         titleLabel.text = "Hello World"
     }
 }
