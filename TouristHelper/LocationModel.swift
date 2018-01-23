@@ -22,13 +22,13 @@ enum SerializationError: Error {
 
 extension Location {
 
-    init(json: [String: Any]) throws {
+    init(_ data: [String: Any]) throws {
      
-        guard let title = json["name"] as? String else {
+        guard let title = data["name"] as? String else {
             throw SerializationError.missing("name")
         }
         
-        guard let geom = json["geometry"] as? [String: Any],
+        guard let geom = data["geometry"] as? [String: Any],
             let lat = geom["lat"] as? Double,
             let lng = geom["lng"] as? Double
             else {
@@ -39,3 +39,4 @@ extension Location {
         self.location = (lat,lng)
     }
 }
+
