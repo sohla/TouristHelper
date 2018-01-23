@@ -10,17 +10,17 @@ import UIKit
 import MapKit
 import ReactiveKit
 
-class MapViewController: UIViewController, LocationService {
+class MapViewController: UIViewController, LocationTrackerStore {
 
     @IBOutlet weak var mapView: MKMapView!
 
-    private var locationController: LocationController!
+    private var locationController: LocationTracker!
     
-    func setLocationService(_ lc: LocationController) {
+    func setLocationTrackerStore(_ lc: LocationTracker) {
         locationController = lc
     }
     
-    func assertLocationService() {
+    func assertLocationTrackerStore() {
         assert(locationController != nil)
     }
 

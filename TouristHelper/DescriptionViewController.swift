@@ -8,24 +8,24 @@
 
 import UIKit
 
-class DescriptionViewController: UIViewController, LocationService {
+class DescriptionViewController: UIViewController, LocationTrackerStore {
 
     @IBOutlet weak var titleLabel: UILabel!
     
-    private var locationController: LocationController!
+    private var locationController: LocationTracker!
 
-    func setLocationService(_ lc: LocationController) {
+    func setLocationTrackerStore(_ lc: LocationTracker) {
         locationController = lc
     }
     
-    func assertLocationService() {
+    func assertLocationTrackerStore() {
         assert(locationController != nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        assertLocationService()
+        assertLocationTrackerStore()
         
         locationController.current?.title.observeNext{ [unowned self] t in
             self.titleLabel.text = t

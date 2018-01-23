@@ -12,13 +12,13 @@ import SwiftLocation
 import ReactiveKit
 import Bond
 
-protocol LocationService {
+protocol LocationTrackerStore {
     associatedtype T
-    func setLocationService(_ : T)
-    func assertLocationService()
+    func setLocationTrackerStore(_ : T)
+    func assertLocationTrackerStore()
 }
 
-class LocationController {
+class LocationTracker {
     
     let status = Property<Int>(0)
     let current = try? Location("Home")

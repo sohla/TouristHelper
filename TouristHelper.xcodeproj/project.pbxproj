@@ -17,7 +17,7 @@
 		F0A75DF62016AAE000AB539E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DF52016AAE000AB539E /* MapViewController.swift */; };
 		F0A75DF82016AAEC00AB539E /* TransportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DF72016AAEC00AB539E /* TransportViewController.swift */; };
 		F0A75DFA2016B03A00AB539E /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DF92016B03A00AB539E /* LocationModel.swift */; };
-		F0A75DFC2016B89600AB539E /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DFB2016B89600AB539E /* LocationController.swift */; };
+		F0A75DFC2016B89600AB539E /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DFB2016B89600AB539E /* LocationTracker.swift */; };
 		F0A75DFE201749AB00AB539E /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DFD201749AB00AB539E /* LocationStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +35,7 @@
 		F0A75DF52016AAE000AB539E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F0A75DF72016AAEC00AB539E /* TransportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViewController.swift; sourceTree = "<group>"; };
 		F0A75DF92016B03A00AB539E /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
-		F0A75DFB2016B89600AB539E /* LocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
+		F0A75DFB2016B89600AB539E /* LocationTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		F0A75DFD201749AB00AB539E /* LocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
 		FD5D72010890104C0E7AB293 /* Pods-TouristHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouristHelper/Pods-TouristHelper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +96,7 @@
 				F0A75DF52016AAE000AB539E /* MapViewController.swift */,
 				F0A75DF72016AAEC00AB539E /* TransportViewController.swift */,
 				F0A75DFD201749AB00AB539E /* LocationStore.swift */,
-				F0A75DFB2016B89600AB539E /* LocationController.swift */,
+				F0A75DFB2016B89600AB539E /* LocationTracker.swift */,
 				F0A75DF92016B03A00AB539E /* LocationModel.swift */,
 				F0A75DE52016A27D00AB539E /* Main.storyboard */,
 				F0A75DE82016A27D00AB539E /* Assets.xcassets */,
@@ -236,7 +236,7 @@
 				F0A75DFE201749AB00AB539E /* LocationStore.swift in Sources */,
 				F0A75DFA2016B03A00AB539E /* LocationModel.swift in Sources */,
 				F0A75DF62016AAE000AB539E /* MapViewController.swift in Sources */,
-				F0A75DFC2016B89600AB539E /* LocationController.swift in Sources */,
+				F0A75DFC2016B89600AB539E /* LocationTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

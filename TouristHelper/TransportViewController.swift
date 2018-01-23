@@ -8,15 +8,15 @@
 
 import UIKit
 
-class TransportViewController: UIViewController, LocationService {
+class TransportViewController: UIViewController, LocationTrackerStore {
 
-    private var locationController: LocationController!
+    private var locationController: LocationTracker!
     
-    func setLocationService(_ lc: LocationController) {
+    func setLocationTrackerStore(_ lc: LocationTracker) {
         locationController = lc
     }
     
-    func assertLocationService() {
+    func assertLocationTrackerStore() {
         assert(locationController != nil)
     }
 
