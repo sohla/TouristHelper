@@ -20,10 +20,8 @@ protocol LocationService {
 
 class LocationController {
     
-    var status = Property<Int>(0)
-    //let current = MutableObservableDictionary(["lat":0.0,"lng":0.0])
-    let current = try? Location(["name":"me","geometry":["lat":1.23,"lng":4.56]])
-    
+    let status = Property<Int>(0)
+    let current = try? Location("Home")
     
     init() {
 
@@ -35,19 +33,11 @@ class LocationController {
         }
         
         Locator.subscribePosition(accuracy: .city, onUpdate: { newLocation in
-            
-//            let nl = ["lat":newLocation.coordinate.latitude,
-//                      "lng":newLocation.coordinate.longitude]
-//            //let _ = self.current.replace(with: nl)
-            
-            
             self.current?.lat.value = newLocation.coordinate.latitude
             self.current?.lng.value = newLocation.coordinate.longitude
-
-        
         
         }, onFail: { err, last in
-            
+            //•
             print("Failed with error: \(err)")
         })
 

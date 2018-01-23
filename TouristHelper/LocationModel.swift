@@ -37,12 +37,14 @@ extension Location {
             else {
                 throw SerializationError.missing("geometry")
         }
-
+        
         self.title.value = title
         self.lat.value = lat
         self.lng.value = lng
     }
     
-    
+    init(_ name: String) throws {
+        try! self.init(["name":name,"geometry":["lat":1.23,"lng":4.56]])
+    }
 }
 

@@ -27,35 +27,24 @@ class MapViewController: UIViewController, LocationService {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // mapView needs CLLocationManager status to be ok
         locationController.status.observeNext{ [unowned self] _ in
                 self.mapView!.showsUserLocation = true
         }.dispose(in: bag)
-        
+
+        // group both properties and return tuple
         let lat:  Property<Double> = (locationController.current?.lat)!
         let lng:  Property<Double> = (locationController.current?.lng)!
-        
         let coords = combineLatest(lat,lng) { lat, lng -> (Double,Double) in
             return (lat,lng)
         }
-        
+        // listen to group with tuple
         coords.observeNext{ [unowned self] e in
-            
-            print(e)
             let userLocation = CLLocation(latitude: e.0 , longitude: e.1)
             let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1500, 1500)
             self.mapView?.setRegion(region, animated: true)
         
         }.dispose(in: bag)
-
-//        locationController.current.observeNext{ [unowned self] e in
-//            
-//            let userLocation = CLLocation(latitude: e.source.dictionary["lat"]!, longitude: e.source.dictionary["lng"]!)
-//            print("current location : \(userLocation)")
-//            let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1500, 1500)
-//            self.mapView?.setRegion(region, animated: true)
-//            
-//        }.dispose(in: bag)
-
     }
 
 }

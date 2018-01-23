@@ -27,6 +27,9 @@ class DescriptionViewController: UIViewController, LocationService {
 
         assertLocationService()
         
-        titleLabel.text = "Hello World"
+        locationController.current?.title.observeNext{ [unowned self] t in
+            self.titleLabel.text = t
+        }.dispose(in: bag)
+        
     }
 }
