@@ -16,6 +16,7 @@
 		F0A75DF42016AAD000AB539E /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DF32016AAD000AB539E /* DescriptionViewController.swift */; };
 		F0A75DF62016AAE000AB539E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DF52016AAE000AB539E /* MapViewController.swift */; };
 		F0A75DF82016AAEC00AB539E /* TransportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DF72016AAEC00AB539E /* TransportViewController.swift */; };
+		F0A75DFA2016B03A00AB539E /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DF92016B03A00AB539E /* LocationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		F0A75DF32016AAD000AB539E /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		F0A75DF52016AAE000AB539E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F0A75DF72016AAEC00AB539E /* TransportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViewController.swift; sourceTree = "<group>"; };
+		F0A75DF92016B03A00AB539E /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		FD5D72010890104C0E7AB293 /* Pods-TouristHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouristHelper/Pods-TouristHelper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 				F0A75DF32016AAD000AB539E /* DescriptionViewController.swift */,
 				F0A75DF52016AAE000AB539E /* MapViewController.swift */,
 				F0A75DF72016AAEC00AB539E /* TransportViewController.swift */,
+				F0A75DF92016B03A00AB539E /* LocationModel.swift */,
 				F0A75DE52016A27D00AB539E /* Main.storyboard */,
 				F0A75DE82016A27D00AB539E /* Assets.xcassets */,
 				F0A75DEA2016A27D00AB539E /* LaunchScreen.storyboard */,
@@ -224,6 +227,7 @@
 				F0A75DF82016AAEC00AB539E /* TransportViewController.swift in Sources */,
 				F0A75DE42016A27D00AB539E /* ViewController.swift in Sources */,
 				F0A75DE22016A27D00AB539E /* AppDelegate.swift in Sources */,
+				F0A75DFA2016B03A00AB539E /* LocationModel.swift in Sources */,
 				F0A75DF62016AAE000AB539E /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
