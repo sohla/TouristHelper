@@ -6,5 +6,6 @@ target 'TouristHelper' do
   use_frameworks!
 
   # Pods for TouristHelper
+  pod 'SwiftLocation', '~> 3.1.0'
 
 end

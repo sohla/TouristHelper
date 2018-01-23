@@ -1,3 +1,15 @@
-PODFILE CHECKSUM: 870b706bfd162bc666afc041b0e7856fb444efcd
+PODS:
+  - SwiftLocation (3.1.0):
+    - SwiftyJSON (~> 4.0.0-alpha.1)
+  - SwiftyJSON (4.0.0)
+
+DEPENDENCIES:
+  - SwiftLocation (~> 3.1.0)
+
+SPEC CHECKSUMS:
+  SwiftLocation: 8f5ef4f510a45e43239de57a3145b3669301e898
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+
+PODFILE CHECKSUM: 2de46f794924ced32d5c37e98c5d8d72b87244d2
 
 COCOAPODS: 1.1.1
