@@ -11,7 +11,7 @@ import MapKit
 import ReactiveKit
 
 //• test class
-class LocalThing: NSObject, MKAnnotation {
+class LocationModelView: NSObject, MKAnnotation {
     let title: String?
     let locationName: String
     let coordinate: CLLocationCoordinate2D
@@ -66,35 +66,46 @@ class MapViewController: UIViewController, LocationTrackerStore, MKMapViewDelega
             //• TESTING
              let locationsService = GooglePlacesWebAPIService()
              
-             locationsService.searchFromLocation(lat: newLocation.coordinate.latitude, lng: newLocation.coordinate.longitude, radius: 10000.0, type: "park", onCompletion: { (data) in
+             locationsService.searchFromLocation(lat: newLocation.coordinate.latitude,
+                                                 lng: newLocation.coordinate.longitude,
+                                                 radius: 10000.0,
+                                                 type: "bank",//park,art_gallery,bank
+                                                 onCompletion: { (data) in
                 
                 // clear everything
                 self.mapView.removeAnnotations(self.mapView.annotations)
                 self.mapView.removeOverlays(self.mapView.overlays)
                 
                 let results = data["results"] as! Array<[String : Any]>
-                var nots: Array<LocalThing> = []
+                var locationModelViews: Array<LocationModelView> = [] //• the store
                 
-                for locale in results {
+                for localResult in results {
 
-                    if let loc = try? Location(locale){
+                    if let loc = try? Location(localResult){
                     
-                        let lc = CLLocationCoordinate2DMake(loc.lat.value,loc.lng.value)
-                        let ant = LocalThing(title: loc.title.value, locationName: loc.title.value, coordinate: lc)
-                        nots.append(ant)
+                        let locModelView = LocationModelView(title: loc.title.value,
+                                                             locationName: loc.title.value,
+                                                             coordinate: CLLocationCoordinate2DMake(loc.lat.value,loc.lng.value))
+                        locationModelViews.append(locModelView)
                     }
                 }
 
-                let locations = nots.map { $0.coordinate }
-                var sortedLocations = locations.sorted { (a, b) -> Bool in
-                    if self.calcAngle(newLocation.coordinate,a) < self.calcAngle(newLocation.coordinate,b){ return true }
+                var sortedLocations = locationModelViews.sorted { (a, b) -> Bool in
+                    
+                    if self.calcAngle(newLocation.coordinate,a.coordinate) <
+                        self.calcAngle(newLocation.coordinate,b.coordinate){
+
+                        return true
+                    }
                     return false
                 }
-                sortedLocations.insert(newLocation.coordinate, at: 0)
-                sortedLocations.append(newLocation.coordinate)
-                let polyline = MKPolyline(coordinates: &sortedLocations, count: sortedLocations.count)
+                let home = LocationModelView(title: "Home", locationName: "home", coordinate: newLocation.coordinate)
+                sortedLocations.insert(home, at: 0)
+                sortedLocations.append(home)
+                var locations = sortedLocations.map { $0.coordinate }
+                let polyline = MKPolyline(coordinates: &locations, count: sortedLocations.count)
                 self.mapView.add(polyline)
-                self.mapView.addAnnotations(nots)
+                self.mapView.addAnnotations(locationModelViews)
 
              })
             //• TESTING
