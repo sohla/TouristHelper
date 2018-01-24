@@ -12,14 +12,14 @@ class DescriptionViewController: UIViewController, LocationTrackerStore {
 
     @IBOutlet weak var titleLabel: UILabel!
     
-    private var locationController: LocationTracker!
+    private var locationTracker: LocationTracker!
 
     func setLocationTrackerStore(_ lc: LocationTracker) {
-        locationController = lc
+        locationTracker = lc
     }
     
     func assertLocationTrackerStore() {
-        assert(locationController != nil)
+        assert(locationTracker != nil)
     }
     
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class DescriptionViewController: UIViewController, LocationTrackerStore {
 
         assertLocationTrackerStore()
         
-        locationController.current?.title.observeNext{ [unowned self] t in
+        locationTracker.current?.title.observeNext{ [unowned self] t in
             self.titleLabel.text = t
         }.dispose(in: bag)
         
