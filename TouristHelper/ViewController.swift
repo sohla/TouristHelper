@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let locationController = LocationTracker()
+    let locationTracker = LocationTracker()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,17 +22,17 @@ class ViewController: UIViewController {
         
         if segue.identifier == "descriptionSegueID" {
             let tvc = segue.destination as? DescriptionViewController
-            tvc?.setLocationTrackerStore(locationController)
+            tvc?.setLocationTrackerStore(locationTracker)
         }
 
         if segue.identifier == "mapSegueID" {
             let tvc = segue.destination as? MapViewController
-            tvc?.setLocationTrackerStore(locationController)
+            tvc?.setLocationTrackerStore(locationTracker)
         }
 
         if segue.identifier == "transportSegueID" {
             let tvc = segue.destination as? TransportViewController
-            tvc?.setLocationTrackerStore(locationController)
+            tvc?.setLocationTrackerStore(locationTracker)
         }
 
     }

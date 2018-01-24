@@ -10,14 +10,14 @@ import UIKit
 
 class TransportViewController: UIViewController, LocationTrackerStore {
 
-    private var locationController: LocationTracker!
+    private var locationTracker: LocationTracker!
     
     func setLocationTrackerStore(_ lc: LocationTracker) {
-        locationController = lc
+        locationTracker = lc
     }
     
     func assertLocationTrackerStore() {
-        assert(locationController != nil)
+        assert(locationTracker != nil)
     }
 
     override func viewDidLoad() {
@@ -29,8 +29,7 @@ class TransportViewController: UIViewController, LocationTrackerStore {
     }
     @IBAction func onHomeTouchUp(_ sender: Any) {
 
-        //• hack an update for now
-        locationController.current?.lat.value = (locationController.current?.lat.value)!
+        locationTracker.updateCurrentPosition()
     }
     @IBAction func onNextTouchUp(_ sender: Any) {
     }
