@@ -22,7 +22,10 @@ class TransportViewController: UIViewController, LocationTrackerStore {
     }
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        assertLocationTrackerStore()
         
         homeButton.reactive.tap.observeNext { [unowned self] _ in
             self.locationTracker.updateCurrentPosition()

@@ -45,8 +45,8 @@ extension Location {
     }
     
     init(_ name: String) throws {
-        try! self.init(["name":name, "geometry":["location":["lat":1.23,"lng":4.56]]])
-        
+
+        try! self.init(["name":name, "geometry":["location":["lat":0.0,"lng":0.0]]])
     }
 }
 

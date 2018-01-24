@@ -26,10 +26,14 @@ class DescriptionViewController: UIViewController, LocationTrackerStore {
         super.viewDidLoad()
 
         assertLocationTrackerStore()
-        
-        locationTracker.current?.title.observeNext{ [unowned self] t in
-            self.titleLabel.text = t
-        }.dispose(in: bag)
-        
+        self.titleLabel.text = "searching..."
+
+        NotificationCenter.default.reactive.notification(name: .locationSelected)
+            .observeNext { notification in
+                if let locationModelView = notification.object as? LocationModelView{
+                    self.titleLabel.text = locationModelView.title
+                }
+            }
+            .dispose(in: bag)
     }
 }
