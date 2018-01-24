@@ -31,22 +31,18 @@ class LocationTracker {
             print("Authorization status changed to \(newStatus)")
             self.status.value = Int(newStatus.rawValue)
         }
-        
-        Locator.subscribePosition(accuracy: .city, onUpdate: { newLocation in
+        updateCurrentPosition()
+    }
+    
+    func updateCurrentPosition() {
+
+        // one shot
+        Locator.currentPosition(accuracy: .house, onSuccess: { newLocation in
             self.current?.lat.value = newLocation.coordinate.latitude
             self.current?.lng.value = newLocation.coordinate.longitude
-        
         }, onFail: { err, last in
-            //•
+            //TODO: handle error
             print("Failed with error: \(err)")
         })
-
-//        // for low power use
-//        Locator.subscribeSignificantLocations(onUpdate: { newLocation in
-//            print("New location \(newLocation)")
-//        }) { (err, lastLocation) -> (Void) in
-//            print("Failed with err: \(err)")
-//        }
-
     }
 }
