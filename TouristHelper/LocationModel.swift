@@ -32,9 +32,10 @@ extension Location {
         }
         
         guard let geom = data["geometry"] as? [String: Any],
-            let lat = geom["lat"] as? Double,
-            let lng = geom["lng"] as? Double
-            else {
+            let loc = geom["location"] as? [String:Any],
+                let lat = loc["lat"] as? Double,
+                let lng = loc["lng"] as? Double
+        else {
                 throw SerializationError.missing("geometry")
         }
         
@@ -44,7 +45,8 @@ extension Location {
     }
     
     init(_ name: String) throws {
-        try! self.init(["name":name,"geometry":["lat":1.23,"lng":4.56]])
+        try! self.init(["name":name, "geometry":["location":["lat":1.23,"lng":4.56]]])
+        
     }
 }
 
