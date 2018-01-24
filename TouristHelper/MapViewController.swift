@@ -10,40 +10,76 @@ import UIKit
 import MapKit
 import ReactiveKit
 
+//• test class
+class LocalThing: NSObject, MKAnnotation {
+    let title: String?
+    let locationName: String
+    let coordinate: CLLocationCoordinate2D
+    
+    init(title: String, locationName: String, coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.locationName = locationName
+        self.coordinate = coordinate
+        super.init()
+    }
+    
+    var subtitle: String? {
+        return locationName
+    }
+}
+
+
 class MapViewController: UIViewController, LocationTrackerStore {
 
     @IBOutlet weak var mapView: MKMapView!
 
-    private var locationController: LocationTracker!
+    private var locationTracker: LocationTracker!
     
     func setLocationTrackerStore(_ lc: LocationTracker) {
-        locationController = lc
+        locationTracker = lc
     }
     
     func assertLocationTrackerStore() {
-        assert(locationController != nil)
+        assert(locationTracker != nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // mapView needs CLLocationManager status to be ok
-        locationController.status.observeNext{ [unowned self] _ in
+        locationTracker.status.observeNext{ [unowned self] _ in
                 self.mapView!.showsUserLocation = true
         }.dispose(in: bag)
 
-        // group both properties and return tuple
-        let lat:  Property<Double> = (locationController.current?.lat)!
-        let lng:  Property<Double> = (locationController.current?.lng)!
-        let coords = combineLatest(lat,lng) { lat, lng -> (Double,Double) in
-            return (lat,lng)
-        }
-        // listen to group with tuple
-        coords.observeNext{ [unowned self] e in
-            let userLocation = CLLocation(latitude: e.0 , longitude: e.1)
-            let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1500, 1500)
+        // group both properties
+        let lat = (locationTracker.current?.lat)!
+        let lng = (locationTracker.current?.lng)!
+        let _ = combineLatest(lat,lng).observeNext{ [unowned self] (lat,lng) in
+            
+            let newLocation = CLLocation(latitude: lat, longitude: lng)
+            let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 1000, 1000)
             self.mapView?.setRegion(region, animated: true)
-        
+
+            //• TESTING
+             let locationService: LocationServiceProtocol = GooglePlacesWebAPI()
+             
+             locationService.searchFromLocation(lat: newLocation.coordinate.latitude, lng: newLocation.coordinate.longitude, radius: 500.0, type: "cafe", onCompletion: { (data) in
+                
+                let results = data["results"] as! Array<[String : Any]>
+                for locale in results {
+
+                    if let loc = try? Location(locale){
+                    
+                        let lc = CLLocationCoordinate2DMake(loc.lat.value,loc.lng.value)
+                        let ant = LocalThing(title: loc.title.value, locationName: loc.title.value, coordinate: lc)
+                        self.mapView.addAnnotation(ant)
+                    }
+                }
+             
+             })
+            //• TESTING
+
+
         }.dispose(in: bag)
     }
 
