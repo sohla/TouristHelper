@@ -9,7 +9,7 @@
 import Foundation
 import Networking
 
-protocol LocationServiceProtocol {
+protocol LocationsServiceProtocol {
     
     var baseURL: String {get}
     var key: String {get}
@@ -19,7 +19,7 @@ protocol LocationServiceProtocol {
 }
 
 
-struct GooglePlacesWebAPI : LocationServiceProtocol{
+struct GooglePlacesWebAPIService : LocationsServiceProtocol{
     
     // google pages at 20 results
     // TODO: add next_page_token with delay on request
