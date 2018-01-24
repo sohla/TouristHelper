@@ -14,24 +14,6 @@ import ReactiveKit
 extension Notification.Name {
     static let locationSelected = Notification.Name("locationSelected")
 }
-//• test class
-class LocationModelView: NSObject, MKAnnotation {
-    let title: String?
-    let locationName: String
-    let coordinate: CLLocationCoordinate2D
-    
-    init(title: String, locationName: String, coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.locationName = locationName
-        self.coordinate = coordinate
-        super.init()
-    }
-    
-    var subtitle: String? {
-        return locationName
-    }
-}
-
 
 class MapViewController: UIViewController, LocationTrackerStore, MKMapViewDelegate {
 
@@ -68,59 +50,58 @@ class MapViewController: UIViewController, LocationTrackerStore, MKMapViewDelega
             let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 15000, 15000)
             self.mapView?.setRegion(region, animated: true)
 
-            //• TESTING
-             let locationsService = GooglePlacesWebAPIService()
-             
-             locationsService.searchFromLocation(lat: newLocation.coordinate.latitude,
-                                                 lng: newLocation.coordinate.longitude,
-                                                 radius: 10000.0,
-                                                 type: "bank",//park,art_gallery,bank
-                                                 onCompletion: { (data) in
-                
-                // clear everything
-                self.mapView.removeAnnotations(self.mapView.annotations)
-                self.mapView.removeOverlays(self.mapView.overlays)
-                
-                let results = data["results"] as! Array<[String : Any]>
-                var locationModelViews: Array<LocationModelView> = [] //• the store
-                
-                for localResult in results {
-
-                    if let loc = try? Location(localResult){
-                    
-                        let locModelView = LocationModelView(title: loc.title.value,
-                                                             locationName: loc.title.value,
-                                                             coordinate: CLLocationCoordinate2DMake(loc.lat.value,loc.lng.value))
-                        locationModelViews.append(locModelView)
-                    }
-                }
-
-                var sortedLocations = locationModelViews.sorted { (a, b) -> Bool in
-                    
-                    if self.calcAngle(newLocation.coordinate,a.coordinate) <
-                        self.calcAngle(newLocation.coordinate,b.coordinate){
-
-                        return true
-                    }
-                    return false
-                }
-                let home = LocationModelView(title: "Home", locationName: "home", coordinate: newLocation.coordinate)
-                sortedLocations.insert(home, at: 0)
-                sortedLocations.append(home)
-                var locations = sortedLocations.map { $0.coordinate }
-                let polyline = MKPolyline(coordinates: &locations, count: sortedLocations.count)
-                self.mapView.add(polyline)
-                self.mapView.addAnnotations(locationModelViews)
-                                                    
-                // trigger selecting user annotation
-                if let userAnnotation = self.mapView!.annotations.first(where: { (a) -> Bool in
-                    a is MKUserLocation
-                }){
-                    self.mapView!.selectAnnotation(userAnnotation, animated: false)
-                }
-
-             })
-            //• TESTING
+//            //• TESTING
+//             let locationsService = GooglePlacesWebAPIService()
+//             
+//             locationsService.searchFromLocation(lat: newLocation.coordinate.latitude,
+//                                                 lng: newLocation.coordinate.longitude,
+//                                                 radius: 10000.0,
+//                                                 type: "bank",//park,art_gallery,bank
+//                                                 onCompletion: { (data) in
+//                
+//                // clear everything
+//                self.mapView.removeAnnotations(self.mapView.annotations)
+//                self.mapView.removeOverlays(self.mapView.overlays)
+//                
+//                let results = data["results"] as! Array<[String : Any]>
+//                var locationModelViews: Array<LocationModelView> = [] //• the store
+//                
+//                for localResult in results {
+//
+//                    if let loc = try? Location(localResult){
+//                    
+//                        let locModelView = LocationModelView(title: loc.title.value,
+//                                                             coordinate: CLLocationCoordinate2DMake(loc.lat.value,loc.lng.value))
+//                        locationModelViews.append(locModelView)
+//                    }
+//                }
+//
+//                var sortedLocations = locationModelViews.sorted { (a, b) -> Bool in
+//                    
+//                    if self.calcAngle(newLocation.coordinate,a.coordinate) <
+//                        self.calcAngle(newLocation.coordinate,b.coordinate){
+//
+//                        return true
+//                    }
+//                    return false
+//                }
+//                let home = LocationModelView(title: "Home", coordinate: newLocation.coordinate)
+//                sortedLocations.insert(home, at: 0)
+//                sortedLocations.append(home)
+//                var locations = sortedLocations.map { $0.coordinate }
+//                let polyline = MKPolyline(coordinates: &locations, count: sortedLocations.count)
+//                self.mapView.add(polyline)
+//                self.mapView.addAnnotations(locationModelViews)
+//                                                    
+//                // trigger selecting user annotation
+//                if let userAnnotation = self.mapView!.annotations.first(where: { (a) -> Bool in
+//                    a is MKUserLocation
+//                }){
+//                    self.mapView!.selectAnnotation(userAnnotation, animated: false)
+//                }
+//
+//             })
+//            //• TESTING
 
 
         }.dispose(in: bag)
@@ -155,7 +136,7 @@ class MapViewController: UIViewController, LocationTrackerStore, MKMapViewDelega
         
         // get the user Annotation and make a LocationModelView to send
         if let userAnnotation = view.annotation as? MKUserLocation {
-            let myLocation = LocationModelView(title: userAnnotation.title! , locationName: userAnnotation.title!, coordinate: userAnnotation.coordinate)
+            let myLocation = LocationModelView(title: userAnnotation.title!, coordinate: userAnnotation.coordinate)
             NotificationCenter.default.post(name: .locationSelected, object:myLocation)
         }
     }

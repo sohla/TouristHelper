@@ -57,9 +57,3 @@ struct GooglePlacesWebAPIService : LocationsServiceProtocol{
 
 
 
-class LocationStore {
-    
-    init() {
-    }
-    
-}
