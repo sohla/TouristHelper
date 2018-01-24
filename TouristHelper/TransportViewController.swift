@@ -11,6 +11,7 @@ import UIKit
 class TransportViewController: UIViewController, LocationTrackerStore {
 
     private var locationTracker: LocationTracker!
+    @IBOutlet weak var homeButton: UIButton!
     
     func setLocationTrackerStore(_ lc: LocationTracker) {
         locationTracker = lc
@@ -22,16 +23,9 @@ class TransportViewController: UIViewController, LocationTrackerStore {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        homeButton.reactive.tap.observeNext { [unowned self] _ in
+            self.locationTracker.updateCurrentPosition()
+        }.dispose(in: bag)
     }
-    
-
-    @IBAction func onPreviousTouchUp(_ sender: Any) {
-    }
-    @IBAction func onHomeTouchUp(_ sender: Any) {
-
-        locationTracker.updateCurrentPosition()
-    }
-    @IBAction func onNextTouchUp(_ sender: Any) {
-    }
-
 }
