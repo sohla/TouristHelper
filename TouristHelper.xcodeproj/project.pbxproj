@@ -383,6 +383,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 901C1A9038A31B5A67EA8E58 /* Pods-TouristHelper.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G9C3VREPPJ;
@@ -400,6 +401,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FD5D72010890104C0E7AB293 /* Pods-TouristHelper.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G9C3VREPPJ;
