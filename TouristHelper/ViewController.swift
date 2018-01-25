@@ -19,16 +19,6 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // "inject" each vc with the tracker
-        if segue.identifier == "descriptionSegueID" {
-            let tvc = segue.destination as? DescriptionViewController
-            tvc?.setLocationTrackerStore(locationTracker)
-        }
-
-        if segue.identifier == "mapSegueID" {
-            let tvc = segue.destination as? MapViewController
-            tvc?.setLocationTrackerStore(locationTracker)
-        }
-
         if segue.identifier == "transportSegueID" {
             let tvc = segue.destination as? TransportViewController
             tvc?.setLocationTrackerStore(locationTracker)

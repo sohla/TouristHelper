@@ -20,18 +20,15 @@ protocol LocationTrackerStore {
 
 class LocationTracker {
     
-    let status = Property<Int>(0)
-    let current = try? Location("Home")
-    
     init() {
 
         Locator.requestAuthorizationIfNeeded(.whenInUse)
-      
+        
         Locator.events.listen { newStatus in
             print("Authorization status changed to \(newStatus)")
-            self.status.value = Int(newStatus.rawValue)
+            NotificationCenter.default.post(name: .authorizationStatusChanged , object:newStatus)
+            self.updateCurrentPosition()
         }
-        updateCurrentPosition()
 
     }
     
@@ -39,8 +36,8 @@ class LocationTracker {
 
         // one shot
         Locator.currentPosition(accuracy: .house, onSuccess: { newLocation in
-            self.current?.lat.value = newLocation.coordinate.latitude
-            self.current?.lng.value = newLocation.coordinate.longitude
+            NotificationCenter.default.post(name: .currentLocationUpdated , object:newLocation)
+            
         }, onFail: { err, last in
             //TODO: handle error
             print("Failed with error: \(err)")

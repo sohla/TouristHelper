@@ -11,48 +11,51 @@ import MapKit
 import ReactiveKit
 
 
-extension Notification.Name {
-    static let locationSelected = Notification.Name("locationSelected")
-}
 
-class MapViewController: UIViewController, LocationTrackerStore, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
-
-    private var locationTracker: LocationTracker!
-    
-    func setLocationTrackerStore(_ lc: LocationTracker) {
-        locationTracker = lc
-    }
-    
-    func assertLocationTrackerStore() {
-        assert(locationTracker != nil)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        assertLocationTrackerStore()
         
         self.mapView.delegate = self
         
         // mapView needs CLLocationManager status to be ok
-        locationTracker.status.observeNext{ [unowned self] _ in
-            self.mapView!.showsUserLocation = true
-        }.dispose(in: bag)
+//        locationTracker.status.observeNext{ [unowned self] _ in
+//        }.dispose(in: bag)
+        NotificationCenter.default.reactive.notification(name: .authorizationStatusChanged)
+            .observeNext { [unowned self] notification in
+                print(notification.object)
+                self.mapView!.showsUserLocation = true
+            }.dispose(in: bag)
 
-        // group both properties
-        //TODO: combineLatest not working?
-        let lat = (locationTracker.current?.lat)!
-        let lng = (locationTracker.current?.lng)!
-        let _ = combineLatest(lat,lng).observeNext{ [unowned self] (lat,lng) in
-            let newLocation = CLLocation(latitude: lat, longitude: lng)
-            let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 15000, 15000)
-            self.mapView?.setRegion(region, animated: true)
+        
+        NotificationCenter.default.reactive.notification(name: .currentLocationUpdated)
+            .observeNext { [unowned self] notification in
 
-            self.findPlacesWith(currentLocation: newLocation)
+                if let newLocation = notification.object as? CLLocation {
+                    let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 15000, 15000)
+                    self.mapView?.setRegion(region, animated: true)
+                    
+                    self.findPlacesWith(currentLocation: newLocation)
+                }
+                
+            }.dispose(in: bag)
 
-        }.dispose(in: bag)
+//        // group both properties
+//        //TODO: combineLatest not working?
+//        let lat = (locationTracker.current?.lat)!
+//        let lng = (locationTracker.current?.lng)!
+//        let _ = combineLatest(lat,lng).observeNext{ [unowned self] (lat,lng) in
+//            let newLocation = CLLocation(latitude: lat, longitude: lng)
+//            let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 15000, 15000)
+//            self.mapView?.setRegion(region, animated: true)
+//
+//            self.findPlacesWith(currentLocation: newLocation)
+//
+//        }.dispose(in: bag)
     }
     
     //MARK:- DEMO FUNCTION

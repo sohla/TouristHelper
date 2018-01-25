@@ -8,24 +8,14 @@
 
 import UIKit
 
-class DescriptionViewController: UIViewController, LocationTrackerStore {
+class DescriptionViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     
-    private var locationTracker: LocationTracker!
-
-    func setLocationTrackerStore(_ lc: LocationTracker) {
-        locationTracker = lc
-    }
-    
-    func assertLocationTrackerStore() {
-        assert(locationTracker != nil)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        assertLocationTrackerStore()
         self.titleLabel.text = "searching..."
 
         NotificationCenter.default.reactive.notification(name: .locationSelected)
