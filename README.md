@@ -20,9 +20,10 @@ This app relies on a few libraries :
 - Networking : there are many libraries to deal with NSURLSession. This seemed small and simple and had an interface that served my needs. With more time i would abstract this layer so i could replace with *any* library.
 
 
-### Installation
+### Build
 
-Project includes pods. To update pods, use ```pod update``` in project folder.
+Project uses CocoaPods. Pods are included in this repo.
+To update pods, use ```pod update``` in project folder.
 
 
 
