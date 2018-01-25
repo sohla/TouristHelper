@@ -15,6 +15,7 @@ import ReactiveKit
 class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    let searcher = LocationSearcher()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,72 +34,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             .observeNext { [unowned self] notification in
 
                 if let newLocation = notification.object as? CLLocation {
+
                     let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 15000, 15000)
                     self.mapView?.setRegion(region, animated: true)
-                    
-                    //self.findPlacesWith(currentLocation: newLocation)
+
+                    // search for new places and update map
+                    self.searcher.findPlacesWith(location: newLocation, onCompletion: { (sortedLocations) in
+                        self.refreshMapViewWithPlaces(locations: sortedLocations)
+                    })
                 }
-                
             }.dispose(in: bag)
     }
-    
-    //MARK:- DEMO FUNCTION
-    // Quick hack finding a bunch of places from google,
-    // sorting them out and presenting them on the mapview
-    // None of this code belongs here and needs to be abstracted
-    // to a better place.
-    // change kPlaceType for different searches eg: park,art_gallery,bank
-    let kPlaceType = "bank"
-    
-    func findPlacesWith(currentLocation: CLLocation) {
-        
-        let locationsService = GooglePlacesWebAPIService()
-        
-        locationsService.searchFromLocation(lat: currentLocation.coordinate.latitude,
-                                            lng: currentLocation.coordinate.longitude,
-                                            radius: 10000.0,
-                                            type: kPlaceType,
-            onCompletion: { (results) in
-                
-                print("Found \(results.count) Places")
 
-                // clear everything
-                self.mapView.removeAnnotations(self.mapView.annotations)
-                self.mapView.removeOverlays(self.mapView.overlays)
-                
-                var locationModelViews: Array<LocationModelView> = [] 
-                
-                for localResult in results {
-                    
-                    if let loc = try? Location(localResult){
-                        
-                        let locModelView = LocationModelView(location: loc)
-                        locationModelViews.append(locModelView)
-                    }
-                }
-                
-                // basic sort by calc. angle made by the origin (user location)
-                // and each places loaction.
-                var sortedLocations = locationModelViews.sorted { (a, b) -> Bool in
-                    
-                    if self.calcAngle(currentLocation.coordinate,a.coordinate) <
-                        self.calcAngle(currentLocation.coordinate,b.coordinate){
-                        
-                        return true
-                    }
-                    return false
-                }
-                // add users location to being and end of the list
-                let home = LocationModelView(title: "Home", coordinate: currentLocation.coordinate)
-                sortedLocations.insert(home, at: 0)
-                sortedLocations.append(home)
-                
-                
-        })
-    }
-    
     func refreshMapViewWithPlaces(locations: [LocationModelView]){
-        
+
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.mapView.removeOverlays(self.mapView.overlays)
+
         var locationsCoords = locations.map { $0.coordinate }
         let polyline = MKPolyline(coordinates: &locationsCoords, count: locationsCoords.count)
         self.mapView.add(polyline)
@@ -114,16 +66,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
         
         
-    
-    // helper func to calc. angle from origin to pnt
-    func calcAngle(_ origin:CLLocationCoordinate2D,
-                   _ pnt:CLLocationCoordinate2D) -> Double {
- 
-        let rad = atan2(pnt.latitude - origin.latitude, pnt.longitude - origin.longitude)
-        let ang = rad * (180.0 / Double.pi)
-        return ang
-    }
-    
     // MARK: MapView Delegate
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
