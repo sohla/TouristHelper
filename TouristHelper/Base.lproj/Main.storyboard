@@ -14,6 +14,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TouristHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -55,14 +56,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="9Wc-kc-aEa"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1423.2" y="51.724137931034484"/>
         </scene>
         <!--Description View Controller-->
         <scene sceneID="oUD-r8-fVP">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="la6-rZ-yhO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="7Xy-ud-mNx" customClass="DescriptionViewController" customModule="TouristHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hlg-X9-KCx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
@@ -88,13 +90,13 @@
                         <outlet property="titleLabel" destination="efE-Zq-saL" id="Pfw-tV-3TE"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="la6-rZ-yhO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-634.39999999999998" y="-298.65067466266868"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="B9J-Lb-HKz">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KBc-67-0ST" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="HPV-PN-POJ" customClass="MapViewController" customModule="TouristHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wWG-9e-KA1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="520"/>
@@ -117,13 +119,13 @@
                         <outlet property="mapView" destination="ZdF-bh-kd7" id="hgX-ev-M3v"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KBc-67-0ST" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-634.39999999999998" y="50.374812593703155"/>
         </scene>
         <!--Transport View Controller-->
         <scene sceneID="SNu-tt-jh1">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qIf-38-B2g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="v4v-Wq-apa" customClass="TransportViewController" customModule="TouristHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o3v-6Z-A6F">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
@@ -145,7 +147,6 @@
                         <outlet property="homeButton" destination="pL6-jO-hWR" id="hn9-iE-dlP"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qIf-38-B2g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-634.39999999999998" y="333.7331334332834"/>
         </scene>

@@ -22,6 +22,7 @@
 		F0A75DFC2016B89600AB539E /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DFB2016B89600AB539E /* LocationTracker.swift */; };
 		F0A75DFE201749AB00AB539E /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DFD201749AB00AB539E /* LocationServices.swift */; };
 		F0B1BF4F2019996000852930 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1BF4E2019996000852930 /* Notifications.swift */; };
+		F0B1BF5320199FD100852930 /* PlaceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1BF5220199FD100852930 /* PlaceTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		F0A75DFB2016B89600AB539E /* LocationTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		F0A75DFD201749AB00AB539E /* LocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
 		F0B1BF4E2019996000852930 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		F0B1BF5220199FD100852930 /* PlaceTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTypes.swift; sourceTree = "<group>"; };
 		FD5D72010890104C0E7AB293 /* Pods-TouristHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouristHelper/Pods-TouristHelper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				F0A75DE12016A27D00AB539E /* AppDelegate.swift */,
+				F0B1BF5220199FD100852930 /* PlaceTypes.swift */,
 				F0B1BF4E2019996000852930 /* Notifications.swift */,
 				F0A75DE32016A27D00AB539E /* ViewController.swift */,
 				F0A75DF32016AAD000AB539E /* DescriptionViewController.swift */,
@@ -242,6 +245,7 @@
 			files = (
 				F0A75DF42016AAD000AB539E /* DescriptionViewController.swift in Sources */,
 				F030099520194F1A002E5CB2 /* LocationModelView.swift in Sources */,
+				F0B1BF5320199FD100852930 /* PlaceTypes.swift in Sources */,
 				F0B1BF4F2019996000852930 /* Notifications.swift in Sources */,
 				F0A75DF82016AAEC00AB539E /* TransportViewController.swift in Sources */,
 				F0A75DE42016A27D00AB539E /* ViewController.swift in Sources */,

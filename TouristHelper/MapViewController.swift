@@ -22,12 +22,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         self.mapView.delegate = self
         
-        // mapView needs CLLocationManager status to be ok
-//        locationTracker.status.observeNext{ [unowned self] _ in
-//        }.dispose(in: bag)
         NotificationCenter.default.reactive.notification(name: .authorizationStatusChanged)
             .observeNext { [unowned self] notification in
-                print(notification.object)
+
                 self.mapView!.showsUserLocation = true
             }.dispose(in: bag)
 
@@ -39,23 +36,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 15000, 15000)
                     self.mapView?.setRegion(region, animated: true)
                     
-                    self.findPlacesWith(currentLocation: newLocation)
+                    //self.findPlacesWith(currentLocation: newLocation)
                 }
                 
             }.dispose(in: bag)
-
-//        // group both properties
-//        //TODO: combineLatest not working?
-//        let lat = (locationTracker.current?.lat)!
-//        let lng = (locationTracker.current?.lng)!
-//        let _ = combineLatest(lat,lng).observeNext{ [unowned self] (lat,lng) in
-//            let newLocation = CLLocation(latitude: lat, longitude: lng)
-//            let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 15000, 15000)
-//            self.mapView?.setRegion(region, animated: true)
-//
-//            self.findPlacesWith(currentLocation: newLocation)
-//
-//        }.dispose(in: bag)
     }
     
     //MARK:- DEMO FUNCTION
@@ -109,20 +93,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 sortedLocations.insert(home, at: 0)
                 sortedLocations.append(home)
                 
-                var locations = sortedLocations.map { $0.coordinate }
-                let polyline = MKPolyline(coordinates: &locations, count: sortedLocations.count)
-                self.mapView.add(polyline)
-                self.mapView.addAnnotations(locationModelViews)
-                
-                // trigger selecting user annotation
-                if let userAnnotation = self.mapView!.annotations.first(where: { (a) -> Bool in
-                    a is MKUserLocation
-                }){
-                    self.mapView!.selectAnnotation(userAnnotation, animated: false)
-                }
                 
         })
     }
+    
+    func refreshMapViewWithPlaces(locations: [LocationModelView]){
+        
+        var locationsCoords = locations.map { $0.coordinate }
+        let polyline = MKPolyline(coordinates: &locationsCoords, count: locationsCoords.count)
+        self.mapView.add(polyline)
+        self.mapView.addAnnotations(locations)
+        
+        // trigger selecting user annotation
+        if let userAnnotation = self.mapView!.annotations.first(where: { (a) -> Bool in
+            a is MKUserLocation
+        }){
+            self.mapView!.selectAnnotation(userAnnotation, animated: false)
+        }
+
+    }
+        
+        
     
     // helper func to calc. angle from origin to pnt
     func calcAngle(_ origin:CLLocationCoordinate2D,

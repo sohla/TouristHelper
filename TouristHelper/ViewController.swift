@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     let locationTracker = LocationTracker()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         }
 
     }
-
+    
+    // searcher
+    // when done tell map view to update
 }
 
