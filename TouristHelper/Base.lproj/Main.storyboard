@@ -133,25 +133,11 @@
                                 <rect key="frame" x="166.5" y="5" width="41" height="30"/>
                                 <state key="normal" title="Home"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncT-K4-csE">
-                                <rect key="frame" x="327" y="5" width="32" height="30"/>
-                                <state key="normal" title="Next"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIR-up-B4L">
-                                <rect key="frame" x="16" y="5" width="59" height="30"/>
-                                <state key="normal" title="Previous"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pL6-jO-hWR" firstAttribute="centerX" secondItem="o3v-6Z-A6F" secondAttribute="centerX" id="5om-03-Qoo"/>
-                            <constraint firstItem="ncT-K4-csE" firstAttribute="centerY" secondItem="o3v-6Z-A6F" secondAttribute="centerY" id="Ncw-Xs-pir"/>
-                            <constraint firstAttribute="trailing" secondItem="ncT-K4-csE" secondAttribute="trailing" constant="16" id="Svh-dg-MTf"/>
-                            <constraint firstItem="ncT-K4-csE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="o3v-6Z-A6F" secondAttribute="leading" constant="20" symbolic="YES" id="mHY-hB-eZ7"/>
                             <constraint firstItem="pL6-jO-hWR" firstAttribute="centerY" secondItem="o3v-6Z-A6F" secondAttribute="centerY" id="nbF-Dh-Jbi"/>
-                            <constraint firstItem="sIR-up-B4L" firstAttribute="leading" secondItem="o3v-6Z-A6F" secondAttribute="leading" constant="16" id="o6h-16-9B3"/>
-                            <constraint firstItem="sIR-up-B4L" firstAttribute="centerY" secondItem="o3v-6Z-A6F" secondAttribute="centerY" id="pqx-53-XHg"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sIR-up-B4L" secondAttribute="trailing" constant="20" symbolic="YES" id="wQT-tS-n13"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oX8-8I-hsB"/>
                     </view>

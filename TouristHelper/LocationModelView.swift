@@ -21,4 +21,10 @@ class LocationModelView: NSObject, MKAnnotation {
         super.init()
     }
     
+    convenience init(location: Location){
+        
+        self.init(title: location.title.value, coordinate: CLLocationCoordinate2D(latitude: location.lat.value, longitude: location.lng.value) )
+        
+    }
+    
 }

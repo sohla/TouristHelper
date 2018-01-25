@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5895A7D083521FBE738FC2AB /* Pods_TouristHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B45748312851FE506FDB3BA5 /* Pods_TouristHelper.framework */; };
 		F030099520194F1A002E5CB2 /* LocationModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F030099420194F1A002E5CB2 /* LocationModelView.swift */; };
-		F0300997201950BF002E5CB2 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0300996201950BF002E5CB2 /* LocationSearcher.swift */; };
+		F030099920195784002E5CB2 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F030099820195784002E5CB2 /* LocationSearcher.swift */; };
 		F0A75DE22016A27D00AB539E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DE12016A27D00AB539E /* AppDelegate.swift */; };
 		F0A75DE42016A27D00AB539E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A75DE32016A27D00AB539E /* ViewController.swift */; };
 		F0A75DE72016A27D00AB539E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0A75DE52016A27D00AB539E /* Main.storyboard */; };
@@ -27,7 +27,7 @@
 		901C1A9038A31B5A67EA8E58 /* Pods-TouristHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristHelper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TouristHelper/Pods-TouristHelper.debug.xcconfig"; sourceTree = "<group>"; };
 		B45748312851FE506FDB3BA5 /* Pods_TouristHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouristHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F030099420194F1A002E5CB2 /* LocationModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelView.swift; sourceTree = "<group>"; };
-		F0300996201950BF002E5CB2 /* LocationSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
+		F030099820195784002E5CB2 /* LocationSearcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
 		F0A75DDE2016A27D00AB539E /* TouristHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouristHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0A75DE12016A27D00AB539E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0A75DE32016A27D00AB539E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 				F0A75DF32016AAD000AB539E /* DescriptionViewController.swift */,
 				F0A75DF52016AAE000AB539E /* MapViewController.swift */,
 				F0A75DF72016AAEC00AB539E /* TransportViewController.swift */,
-				F0300996201950BF002E5CB2 /* LocationSearcher.swift */,
+				F030099820195784002E5CB2 /* LocationSearcher.swift */,
 				F0A75DFD201749AB00AB539E /* LocationServices.swift */,
 				F0A75DFB2016B89600AB539E /* LocationTracker.swift */,
 				F0A75DF92016B03A00AB539E /* LocationModel.swift */,
@@ -240,7 +240,7 @@
 				F0A75DF82016AAEC00AB539E /* TransportViewController.swift in Sources */,
 				F0A75DE42016A27D00AB539E /* ViewController.swift in Sources */,
 				F0A75DE22016A27D00AB539E /* AppDelegate.swift in Sources */,
-				F0300997201950BF002E5CB2 /* LocationSearcher.swift in Sources */,
+				F030099920195784002E5CB2 /* LocationSearcher.swift in Sources */,
 				F0A75DFE201749AB00AB539E /* LocationServices.swift in Sources */,
 				F0A75DFA2016B03A00AB539E /* LocationModel.swift in Sources */,
 				F0A75DF62016AAE000AB539E /* MapViewController.swift in Sources */,

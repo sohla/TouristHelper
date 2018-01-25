@@ -18,8 +18,7 @@ class ViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        // print("main",segue.destination)
-        
+        // "inject" each vc with the tracker
         if segue.identifier == "descriptionSegueID" {
             let tvc = segue.destination as? DescriptionViewController
             tvc?.setLocationTrackerStore(locationTracker)

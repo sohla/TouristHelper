@@ -33,7 +33,6 @@ class DescriptionViewController: UIViewController, LocationTrackerStore {
                 if let locationModelView = notification.object as? LocationModelView{
                     self.titleLabel.text = locationModelView.title
                 }
-            }
-            .dispose(in: bag)
+            }.dispose(in: bag)
     }
 }

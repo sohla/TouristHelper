@@ -14,8 +14,11 @@ protocol LocationsServiceProtocol {
     var baseURL: String {get}
     var key: String {get}
     
-    func searchFromLocation(lat: Double, lng: Double, radius: Double, type: String, onCompletion:@escaping ([String:Any]) -> Void)
-    //• onLocationFound(Location)->
+    func searchFromLocation(lat: Double,
+                            lng: Double,
+                            radius: Double,
+                            type: String,
+                            onCompletion:@escaping ([[String:Any]]) -> Void)
 }
 
 
@@ -27,7 +30,7 @@ struct GooglePlacesWebAPIService : LocationsServiceProtocol{
     let baseURL = "https://maps.googleapis.com/maps/api/place/nearbysearch"
     let key = "AIzaSyCF6AZHrPxujMBMpfOr6QbhSMkskWeoxfE"
 
-    func searchFromLocation(lat: Double, lng: Double, radius: Double, type: String, onCompletion: @escaping ([String:Any]) -> Void){
+    func searchFromLocation(lat: Double, lng: Double, radius: Double, type: String, onCompletion: @escaping ([[String:Any]]) -> Void){
 
         let networking = Networking(baseURL:self.baseURL)
         let locationString = lat.description+","+lng.description
@@ -42,9 +45,8 @@ struct GooglePlacesWebAPIService : LocationsServiceProtocol{
         networking.get("/json", parameters:params){ result in
             switch result {
             case .success(let response):
-                print("================ SUCCESS ===================")
-                // return a Location?
-                onCompletion(response.dictionaryBody)
+                let results = response.dictionaryBody["results"] as! Array<[String : Any]>
+                onCompletion(results)
 
             case .failure(let response):
                 //TODO: handle error

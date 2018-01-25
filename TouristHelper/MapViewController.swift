@@ -50,65 +50,80 @@ class MapViewController: UIViewController, LocationTrackerStore, MKMapViewDelega
             let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 15000, 15000)
             self.mapView?.setRegion(region, animated: true)
 
-//            //• TESTING
-//             let locationsService = GooglePlacesWebAPIService()
-//             
-//             locationsService.searchFromLocation(lat: newLocation.coordinate.latitude,
-//                                                 lng: newLocation.coordinate.longitude,
-//                                                 radius: 10000.0,
-//                                                 type: "bank",//park,art_gallery,bank
-//                                                 onCompletion: { (data) in
-//                
-//                // clear everything
-//                self.mapView.removeAnnotations(self.mapView.annotations)
-//                self.mapView.removeOverlays(self.mapView.overlays)
-//                
-//                let results = data["results"] as! Array<[String : Any]>
-//                var locationModelViews: Array<LocationModelView> = [] //• the store
-//                
-//                for localResult in results {
-//
-//                    if let loc = try? Location(localResult){
-//                    
-//                        let locModelView = LocationModelView(title: loc.title.value,
-//                                                             coordinate: CLLocationCoordinate2DMake(loc.lat.value,loc.lng.value))
-//                        locationModelViews.append(locModelView)
-//                    }
-//                }
-//
-//                var sortedLocations = locationModelViews.sorted { (a, b) -> Bool in
-//                    
-//                    if self.calcAngle(newLocation.coordinate,a.coordinate) <
-//                        self.calcAngle(newLocation.coordinate,b.coordinate){
-//
-//                        return true
-//                    }
-//                    return false
-//                }
-//                let home = LocationModelView(title: "Home", coordinate: newLocation.coordinate)
-//                sortedLocations.insert(home, at: 0)
-//                sortedLocations.append(home)
-//                var locations = sortedLocations.map { $0.coordinate }
-//                let polyline = MKPolyline(coordinates: &locations, count: sortedLocations.count)
-//                self.mapView.add(polyline)
-//                self.mapView.addAnnotations(locationModelViews)
-//                                                    
-//                // trigger selecting user annotation
-//                if let userAnnotation = self.mapView!.annotations.first(where: { (a) -> Bool in
-//                    a is MKUserLocation
-//                }){
-//                    self.mapView!.selectAnnotation(userAnnotation, animated: false)
-//                }
-//
-//             })
-//            //• TESTING
-
+            self.findPlacesWith(currentLocation: newLocation)
 
         }.dispose(in: bag)
     }
     
+    //MARK:- DEMO FUNCTION
+    // Quick hack finding a bunch of places from google,
+    // sorting them out and presenting them on the mapview
+    // None of this code belongs here and needs to be abstracted
+    // to a better place.
+    // change kPlaceType for different searches eg: park,art_gallery,bank
+    let kPlaceType = "bank"
+    
+    func findPlacesWith(currentLocation: CLLocation) {
+        
+        let locationsService = GooglePlacesWebAPIService()
+        
+        locationsService.searchFromLocation(lat: currentLocation.coordinate.latitude,
+                                            lng: currentLocation.coordinate.longitude,
+                                            radius: 10000.0,
+                                            type: kPlaceType,
+            onCompletion: { (results) in
+                
+                print("Found \(results.count) Places")
+
+                // clear everything
+                self.mapView.removeAnnotations(self.mapView.annotations)
+                self.mapView.removeOverlays(self.mapView.overlays)
+                
+                var locationModelViews: Array<LocationModelView> = [] 
+                
+                for localResult in results {
+                    
+                    if let loc = try? Location(localResult){
+                        
+                        let locModelView = LocationModelView(location: loc)
+                        locationModelViews.append(locModelView)
+                    }
+                }
+                
+                // basic sort by calc. angle made by the origin (user location)
+                // and each places loaction.
+                var sortedLocations = locationModelViews.sorted { (a, b) -> Bool in
+                    
+                    if self.calcAngle(currentLocation.coordinate,a.coordinate) <
+                        self.calcAngle(currentLocation.coordinate,b.coordinate){
+                        
+                        return true
+                    }
+                    return false
+                }
+                // add users location to being and end of the list
+                let home = LocationModelView(title: "Home", coordinate: currentLocation.coordinate)
+                sortedLocations.insert(home, at: 0)
+                sortedLocations.append(home)
+                
+                var locations = sortedLocations.map { $0.coordinate }
+                let polyline = MKPolyline(coordinates: &locations, count: sortedLocations.count)
+                self.mapView.add(polyline)
+                self.mapView.addAnnotations(locationModelViews)
+                
+                // trigger selecting user annotation
+                if let userAnnotation = self.mapView!.annotations.first(where: { (a) -> Bool in
+                    a is MKUserLocation
+                }){
+                    self.mapView!.selectAnnotation(userAnnotation, animated: false)
+                }
+                
+        })
+    }
+    
     // helper func to calc. angle from origin to pnt
-    func calcAngle(_ origin:CLLocationCoordinate2D, _ pnt:CLLocationCoordinate2D) -> Double {
+    func calcAngle(_ origin:CLLocationCoordinate2D,
+                   _ pnt:CLLocationCoordinate2D) -> Double {
  
         let rad = atan2(pnt.latitude - origin.latitude, pnt.longitude - origin.longitude)
         let ang = rad * (180.0 / Double.pi)
@@ -136,101 +151,11 @@ class MapViewController: UIViewController, LocationTrackerStore, MKMapViewDelega
         
         // get the user Annotation and make a LocationModelView to send
         if let userAnnotation = view.annotation as? MKUserLocation {
-            let myLocation = LocationModelView(title: userAnnotation.title!, coordinate: userAnnotation.coordinate)
-            NotificationCenter.default.post(name: .locationSelected, object:myLocation)
+            let myLocation = LocationModelView(title: userAnnotation.title!,
+                                               coordinate: userAnnotation.coordinate)
+            NotificationCenter.default.post(name: .locationSelected,
+                                            object:myLocation)
         }
     }
 }
-/*
- // google places API : TYPES
- accounting
- airport
- amusement_park
- aquarium
- art_gallery
- atm
- bakery
- bank
- bar
- beauty_salon
- bicycle_store
- book_store
- bowling_alley
- bus_station
- cafe
- campground
- car_dealer
- car_rental
- car_repair
- car_wash
- casino
- cemetery
- church
- city_hall
- clothing_store
- convenience_store
- courthouse
- dentist
- department_store
- doctor
- electrician
- electronics_store
- embassy
- fire_station
- florist
- funeral_home
- furniture_store
- gas_station
- gym
- hair_care
- hardware_store
- hindu_temple
- home_goods_store
- hospital
- insurance_agency
- jewelry_store
- laundry
- lawyer
- library
- liquor_store
- local_government_office
- locksmith
- lodging
- meal_delivery
- meal_takeaway
- mosque
- movie_rental
- movie_theater
- moving_company
- museum
- night_club
- painter
- park
- parking
- pet_store
- pharmacy
- physiotherapist
- plumber
- police
- post_office
- real_estate_agency
- restaurant
- roofing_contractor
- rv_park
- school
- shoe_store
- shopping_mall
- spa
- stadium
- storage
- store
- subway_station
- supermarket
- synagogue
- taxi_stand
- train_station
- transit_station
- travel_agency
- veterinary_care
- zoo
- */
+
