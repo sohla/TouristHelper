@@ -41,19 +41,16 @@ class LocationSearcher {
             
             // basic sort by calc. angle made by the origin (user location)
             // and each places loaction.
-            var sortedLocations = locationModelViews.sorted { (a, b) -> Bool in
+            let sortedLocations = locationModelViews.sorted { (a, b) -> Bool in
                 if self.calcAngle(location.coordinate,a.coordinate) <
                     self.calcAngle(location.coordinate,b.coordinate){
                     return true
                 }
                 return false
             }
-            
             onCompletion(sortedLocations)
-                                                
         })
     }
-    
     
     // helper func to calc. angle from origin to pnt
     func calcAngle(_ origin:CLLocationCoordinate2D,
@@ -63,8 +60,6 @@ class LocationSearcher {
         let ang = rad * (180.0 / Double.pi)
         return ang
     }
-    
-
 }
 
 

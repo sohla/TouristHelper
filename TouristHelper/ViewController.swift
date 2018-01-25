@@ -25,8 +25,5 @@ class ViewController: UIViewController {
         }
 
     }
-    
-    // searcher
-    // when done tell map view to update
 }
 

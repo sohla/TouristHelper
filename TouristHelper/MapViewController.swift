@@ -18,8 +18,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     let searcher = LocationSearcher()
 
     override func viewDidLoad() {
-        super.viewDidLoad()
 
+        super.viewDidLoad()
         
         self.mapView.delegate = self
         
@@ -54,6 +54,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
             }.dispose(in: bag)
     }
+    
     func refreshAnnotations(locations: [LocationModelView]){
         
         self.mapView.removeAnnotations(self.mapView.annotations)
@@ -75,10 +76,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let polyline = MKPolyline(coordinates: &locationsCoords, count: locationsCoords.count)
         self.mapView.add(polyline)
     }
-
     
-    
-        
     // MARK: MapView Delegate
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
