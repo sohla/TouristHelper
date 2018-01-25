@@ -48,10 +48,6 @@ class LocationSearcher {
                 }
                 return false
             }
-            // add users location to being and end of the list
-            let home = LocationModelView(title: "Home", coordinate: location.coordinate)
-            sortedLocations.insert(home, at: 0)
-            sortedLocations.append(home)
             
             onCompletion(sortedLocations)
                                                 

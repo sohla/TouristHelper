@@ -40,20 +40,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
                     // search for new places and update map
                     self.searcher.findPlacesWith(location: newLocation, onCompletion: { (sortedLocations) in
-                        self.refreshMapViewWithPlaces(locations: sortedLocations)
+                        
+                        self.refreshAnnotations(locations: sortedLocations)
+
+                        // add users location to being and end of the list for the polyline
+                        var sortedLocationsHome = sortedLocations
+                        let home = LocationModelView(title: "Home", coordinate: newLocation.coordinate)
+                        sortedLocationsHome.insert(home, at: 0)
+                        sortedLocationsHome.append(home)
+
+                        self.refreshPolyline(locations: sortedLocationsHome)
                     })
                 }
             }.dispose(in: bag)
     }
-
-    func refreshMapViewWithPlaces(locations: [LocationModelView]){
-
+    func refreshAnnotations(locations: [LocationModelView]){
+        
         self.mapView.removeAnnotations(self.mapView.annotations)
-        self.mapView.removeOverlays(self.mapView.overlays)
-
-        var locationsCoords = locations.map { $0.coordinate }
-        let polyline = MKPolyline(coordinates: &locationsCoords, count: locationsCoords.count)
-        self.mapView.add(polyline)
         self.mapView.addAnnotations(locations)
         
         // trigger selecting user annotation
@@ -64,7 +67,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
 
     }
-        
+    
+    func refreshPolyline(locations: [LocationModelView]){
+
+        self.mapView.removeOverlays(self.mapView.overlays)
+        var locationsCoords = locations.map { $0.coordinate }
+        let polyline = MKPolyline(coordinates: &locationsCoords, count: locationsCoords.count)
+        self.mapView.add(polyline)
+    }
+
+    
+    
         
     // MARK: MapView Delegate
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
