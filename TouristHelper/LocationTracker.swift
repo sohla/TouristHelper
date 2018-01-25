@@ -32,6 +32,7 @@ class LocationTracker {
             self.status.value = Int(newStatus.rawValue)
         }
         updateCurrentPosition()
+
     }
     
     func updateCurrentPosition() {

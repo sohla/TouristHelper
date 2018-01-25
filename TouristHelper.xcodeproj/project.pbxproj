@@ -28,6 +28,7 @@
 		B45748312851FE506FDB3BA5 /* Pods_TouristHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouristHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F030099420194F1A002E5CB2 /* LocationModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelView.swift; sourceTree = "<group>"; };
 		F030099820195784002E5CB2 /* LocationSearcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
+		F030099A20195E0C002E5CB2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F0A75DDE2016A27D00AB539E /* TouristHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouristHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0A75DE12016A27D00AB539E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0A75DE32016A27D00AB539E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 		F0A75DD52016A27D00AB539E = {
 			isa = PBXGroup;
 			children = (
+				F030099A20195E0C002E5CB2 /* README.md */,
 				F0A75DE02016A27D00AB539E /* TouristHelper */,
 				F0A75DDF2016A27D00AB539E /* Products */,
 				0134B5F683A9903DA387E5AE /* Pods */,
